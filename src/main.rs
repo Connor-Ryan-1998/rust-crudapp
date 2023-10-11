@@ -3,7 +3,7 @@ use axum::routing::{get, Router};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let port: i32 = 3000;
+    let port = std::env::var("PORT").unwrap_or_else(|_| "3000".to_string());
     let addr: String = format!("0.0.0.0:{}", port);
 
     let app: Router = Router::new().route("/", get(health));
